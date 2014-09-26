@@ -1,0 +1,24 @@
+{
+  "name": "Tropo",
+  "version": "1.0.0",
+  "homepage": "https://github.com/dennispassway/tropo",
+  "authors": [
+    "Dennis Passway <dennispassway@gmail.com>"
+  ],
+  "description": "An online interactive flying experience for children",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "modernizr": "~2.8.3",
+    "requirejs": "~2.1.15",
+    "threejs": "*"
+  }
+}
