@@ -10,5 +10,5 @@ function worldAnimation(thisObject) {
       thisObject.sound.play();
     }
   }
-  
+
 }

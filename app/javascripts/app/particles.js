@@ -1,36 +1,42 @@
-var particleCount, particleSystem, pCount;
+define(function() {
 
-function addParticles() {
-  // create the particle variables
-  particleCount = 6000,
-  particles = new THREE.Geometry(),
-  pMaterial = new THREE.ParticleBasicMaterial({
-    color: 0xffffff,
-    size: 20
-  });
+  var particles = {
+    init: function () {
+      particleCount = 6000;
+      particles = new THREE.Geometry();
+      pMaterial = new THREE.PointCloudMaterial({
+        color: 0xffffff,
+        size: 20
+      });
 
-  // now create the individual particles
-  for (var p = 0; p < particleCount; p++) {
-    var pX = (Math.random()*18000) - 9000;
-    var pY = (Math.random()*18000) - 9000;
-    var pZ = (Math.random()*18000) - 9000;
-    particle = new THREE.Vector3(pX, pY, pZ);
-    // create a velocity vector
-    particle.velocity = new THREE.Vector3(0,-Math.random(),0);
-    // add it to the geometry
-    particles.vertices.push(particle);
-  }
-  
-  // create the particle system
-  particleSystem = new THREE.ParticleSystem(particles, pMaterial);
+      // Create individual particles
+      for (var p = 0; p < particleCount; p++) {
+        var pX = (Math.random()*18000) - 9000;
+        var pY = (Math.random()*18000) - 9000;
+        var pZ = (Math.random()*18000) - 9000;
+        particle = new THREE.Vector3(pX, pY, pZ);
 
-  scene.add(particleSystem);
-}
+        particle.velocity = new THREE.Vector3(0,-Math.random(),0);
 
-function updateParticles() {
-  if (particleSystem) {
-    particleSystem.rotation.x += 0.004;
-    particleSystem.rotation.y += 0.002;
-    particleSystem.rotation.z += 0.001;
-  }
-}
+        particles.vertices.push(particle);
+      }
+
+      // Create the particle system
+      particleSystem = new THREE.PointCloud(particles, pMaterial);
+      particleSystem.name = 'particles';
+
+      // Add it to the scene
+      scene.add(particleSystem);
+    },
+
+    update: function() {
+      if (particleSystem) {
+        particleSystem.rotation.x += 0.004;
+        particleSystem.rotation.y += 0.002;
+        particleSystem.rotation.z += 0.001;
+      }
+    }
+  };
+  return particles;
+
+});

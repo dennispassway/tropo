@@ -1,22 +1,21 @@
-var activeArea = 9200;
+define(function() {
 
-var landWaarde = 0.00100;
-var vliegWaarde = 0.00018;
-var densityStijging = (landWaarde-vliegWaarde)/10;
-var fogDistance = vliegWaarde;
+  activeArea = 9200;
 
-var fov = 40;
-var near = 1;
-var far = activeArea+4500;
+  fogDistance = 0.00018;
 
-var widthScreen = 1400;
-var heightScreen = 1050;
+  fov = 40;
+  near = 1;
+  far = activeArea+4500;
 
-var afstandAnimatie = 1500;
-var rotatieSnelheidAnimatie = 0.02;
+  widthScreen = 1400;
+  heightScreen = 1050;
 
-var controllerMoves = false;
+  afstandAnimatie = 1500;
+  rotatieSnelheidAnimatie = 0.02;
 
-var boundingBoxScale = 900;
+  controllerMoves = false;
 
-var cameraTarget;;
+  boundingBoxScale = 900;
+
+});

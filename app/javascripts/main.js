@@ -1,5 +1,6 @@
-define(['app'], function(app) {
-  console.log(app);
+define(['application'], function(app) {
+
   app.init();
   app.animate();
+
 });

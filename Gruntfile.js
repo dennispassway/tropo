@@ -13,11 +13,11 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      all: ['Gruntfile.js']
+      all: ['Gruntfile.js', 'app/javascripts/main.js', 'app/javascripts/app/*.js']
     },
 
     watch: {
-      files: ['Gruntfile.js'],
+      files: ['Gruntfile.js', 'app/javascripts/main.js', 'app/javascripts/app/*.js'],
       tasks: ['jshint']
     },
 
