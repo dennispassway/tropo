@@ -1,8 +1,14 @@
 define(['modelDatabase'],function(modelDatabase) {
 
+  modelDatabase.getData();
+
+  document.addEventListener("databaseEvent",function() {
+    console.log(modelDatabase.jsonSet); Hier moet d eplacemodels functie
+  } ,false);
+
   var placeModels = function() {
-    for (var m = 0; m < jsonSet.length; m++){
-      switch(jsonSet[m].model){
+    for (var m = 0; m < modelDatabase.jsonSet.length; m++){
+      switch(modelDatabase.jsonSet[m].model){
         case 'wolk1':
         object[m] = wolk1.clone();
         break;
@@ -94,11 +100,11 @@ define(['modelDatabase'],function(modelDatabase) {
         break;
       }
 
-      object[m].name = jsonSet[m].name;
-      object[m].type = jsonSet[m].model;
-      object[m].position.set(jsonSet[m].x, jsonSet[m].y, jsonSet[m].z);
-      object[m].scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
-      object[m].rotation.set(toRadian(jsonSet[m].rotationX),toRadian(jsonSet[m].rotationY),toRadian(jsonSet[m].rotationZ));
+      object[m].name = modelDatabase.jsonSet[m].name;
+      object[m].type = modelDatabase.jsonSet[m].model;
+      object[m].position.set(modelDatabase.jsonSet[m].x, modelDatabase.jsonSet[m].y, modelDatabase.jsonSet[m].z);
+      object[m].scale.set(modelDatabase.jsonSet[m].scale, modelDatabase.jsonSet[m].scale, modelDatabase.jsonSet[m].scale);
+      object[m].rotation.set(toRadian(modelDatabase.jsonSet[m].rotationX),toRadian(modelDatabase.jsonSet[m].rotationY),toRadian(modelDatabase.jsonSet[m].rotationZ));
       object[m].worldAnimation = new worldAnimation(object[m]);
       object[m].sound = new sound(object[m]);
       scene.add(object[m]);

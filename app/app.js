@@ -8,6 +8,12 @@ requirejs.config({
     oculus: '../libs/OculusRiftEffect',
     fpc: '../libs/FirstPersonControls',
     main: '../main'
+  },
+
+  shim: {
+    'main': {
+      deps: ['jquery', 'threejs']
+    }
   }
 
 });
