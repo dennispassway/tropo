@@ -1,4 +1,4 @@
-define(['convert'], function(convert) {
+define(['convert', 'sounds'], function(convert, sounds) {
 
   var models = {
 
@@ -62,42 +62,36 @@ define(['convert'], function(convert) {
           models.pinguin1 = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.pinguin1.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
-          // THREE.AnimationHandler.add(models.pinguin1.geometry.animations[0]);
       });
 
       new THREE.JSONLoader().load('objects/model/pinguin-2-scooter.js', function (geometry,materials) {
           models.pinguin2 = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.pinguin2.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
-          // THREE.AnimationHandler.add(models.pinguin2.geometry.animations[0]);
       });
 
       new THREE.JSONLoader().load('objects/model/pinguin-3-rocket.js', function (geometry,materials) {
           models.pinguin3 = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.pinguin3.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
-          // THREE.AnimationHandler.add(models.pinguin3.geometry.animations[0]);
       });
 
       new THREE.JSONLoader().load('objects/model/ijsbeer.js', function (geometry,materials) {
           models.ijsbeer = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.ijsbeer.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
-          // THREE.AnimationHandler.add(models.ijsbeer.geometry.animations[0]);
       });
 
       new THREE.JSONLoader().load('objects/model/narwal.js', function (geometry,materials) {
           models.narwal = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.narwal.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
-          // THREE.AnimationHandler.add(models.narwal.geometry.animations[0]);
       });
 
       new THREE.JSONLoader().load('objects/model/meeuw.js', function (geometry,materials) {
           models.meeuw = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.meeuw.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
-          // THREE.AnimationHandler.add(models.meeuw.geometry.animations[0]);
       });
 
       setTimeout(function() {
@@ -121,33 +115,21 @@ define(['convert'], function(convert) {
           break;
           case 'pinguin-jetpack':
           models.objects[m] = models.pinguin1.clone();
-          // models.objects[m].animation = new THREE.Animation(models.objects[m], "PinguinJetpack", THREE.AnimationHandler.CATMULLROM);
-          // models.objects[m].animation.loop = false;
           break;
           case 'pinguin-scooter':
           models.objects[m] = models.pinguin2.clone();
-          // models.objects[m].animation = new THREE.Animation(models.objects[m], "PinguinScooter", THREE.AnimationHandler.CATMULLROM);
-          // models.objects[m].animation.loop = false;
           break;
           case 'pinguin-rocket':
           models.objects[m] = models.pinguin3.clone();
-          // models.objects[m].animation = new THREE.Animation(models.objects[m], "RocketAction", THREE.AnimationHandler.CATMULLROM);
-          // models.objects[m].animation.loop = false;
           break;
           case 'ijsbeer':
           models.objects[m] = models.ijsbeer.clone();
-          // models.objects[m].animation = new THREE.Animation(models.objects[m], "IjsbeerAction", THREE.AnimationHandler.CATMULLROM);
-          // models.objects[m].animation.loop = false;
           break;
           case 'narwal':
           models.objects[m] = models.narwal.clone();
-          // models.objects[m].animation = new THREE.Animation(models.objects[m], "NarwalAction", THREE.AnimationHandler.CATMULLROM);
-          // models.objects[m].animation.loop = false;
           break;
           case 'meeuw':
           models.objects[m] = models.meeuw.clone();
-          // models.objects[m].animation = new THREE.Animation(models.objects[m], "MeeuwAction", THREE.AnimationHandler.CATMULLROM);
-          // models.objects[m].animation.loop = false;
           break;
         }
 
@@ -156,8 +138,7 @@ define(['convert'], function(convert) {
         models.objects[m].position.set(models.data[m].x, models.data[m].y, models.data[m].z);
         models.objects[m].scale.set(models.data[m].scale, models.data[m].scale, models.data[m].scale);
         models.objects[m].rotation.set(convert.toRadian(models.data[m].rotationX),convert.toRadian(models.data[m].rotationY),convert.toRadian(models.data[m].rotationZ));
-        // models.objects[m].worldAnimation = new worldAnimation(models.objects[m]);
-        // models.objects[m].sound = new sound(models.objects[m]);
+        models.objects[m].sound = new sounds.addSound(models.objects[m]);
         scene.add(models.objects[m]);
       }
 
@@ -179,6 +160,23 @@ define(['convert'], function(convert) {
           if (models.verschilY[i] > activeArea) { models.objects[i].position.y = models.objects[i].position.y - (2*activeArea-200); }
           if (models.verschilZ[i] < -activeArea) { models.objects[i].position.z = models.objects[i].position.z + (2*activeArea-200); }
           if (models.verschilZ[i] > activeArea) { models.objects[i].position.z = models.objects[i].position.z - (2*activeArea-200); }
+        }
+      }
+    },
+
+    checkAnimationDistance: function() {
+      for (i = 0; i < models.objects.length; i++) {
+        if (models.objects[i].position.distanceTo(camera.position) < animationDistance) {
+
+          // if (models.objects[i].animation && !models.objects[i].animation.isPlaying){
+              // models.objects[i].animation.play();
+              // if (game) game.collectElement(models.objects[i]);
+          // }
+
+          if (typeof models.objects[i].sound.play == 'function') {
+            models.objects[i].sound.play();
+          }
+
         }
       }
     }

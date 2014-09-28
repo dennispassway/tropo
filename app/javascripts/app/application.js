@@ -1,8 +1,8 @@
-define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skybox', 'particles', 'models'],
- function($, three, oculus, fpc, onWindowResize, variables, skybox, particles, models) {
+define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skybox', 'particles', 'models', 'sounds'],
+ function($, three, oculus, fpc, onWindowResize, variables, skybox, particles, models, sounds) {
 
   var app = {
-    init: function () {
+    init: function (oculus) {
       container = document.getElementById( 'container' );
 
       // Scene
@@ -24,12 +24,13 @@ define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skyb
       skybox.init();
 
       // Particles if we're in the snowworld
-      if (!worldNumber || worldNumber == 1) {
-        particles.init();
-      }
+      if (!worldNumber || worldNumber == 1) particles.init();
 
       // Get, load and place models
       models.init();
+
+      // Load sounds
+      sounds.load();
 
       // Create Clock
       clock = new THREE.Clock();
@@ -40,27 +41,27 @@ define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skyb
 
       // Make screen resizable
       window.addEventListener( 'resize', onWindowResize, false );
+
+      // Configure oculus effect
+      effect = new THREE.OculusRiftEffect( renderer, {worldScale: 100} );
+      effect.setSize( window.innerWidth, window.innerHeight );
     },
 
     animate: function () {
       window.requestAnimationFrame( app.animate );
 
       // Make particles move
-      if (!worldNumber || worldNumber == 1) {
-        particles.update();
-      }
+      if (!worldNumber || worldNumber == 1) particles.update();
 
       // Make world move with camera
       skybox.moveWithCamera();
       models.moveWithCamera();
+      if (!worldNumber || worldNumber == 1) particles.moveWithCamera();
 
-      if (!worldNumber || worldNumber == 1) {
-        particles.moveWithCamera();
-      }
+      // Check distance too objects for animation
+      models.checkAnimationDistance();
 
-      // checkAnimationDistance();
-
-      // Object animation update
+      // Update object animations
       // for (a = 0; a<object.length; a++) {
       //   if (object[a].animation) { object[a].animation.update(0.02); }
       //   if (object[a].worldAnimation.movementAnimation) { object[a].worldAnimation.movementAnimation(); }
@@ -72,7 +73,9 @@ define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skyb
 
     render: function () {
       controls.update( clock.getDelta() );
-      renderer.render( scene, camera );
+
+      effect.render( scene, camera );
+      //   renderer.render( scene, camera );
     }
 
   };
