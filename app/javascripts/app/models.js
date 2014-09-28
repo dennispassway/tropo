@@ -1,4 +1,4 @@
-define(function() {
+define(['convert'], function(convert) {
 
   var models = {
 
@@ -155,12 +155,32 @@ define(function() {
         models.objects[m].type = models.data[m].model;
         models.objects[m].position.set(models.data[m].x, models.data[m].y, models.data[m].z);
         models.objects[m].scale.set(models.data[m].scale, models.data[m].scale, models.data[m].scale);
-        // models.objects[m].rotation.set(toRadian(models.data[m].rotationX),toRadian(models.data[m].rotationY),toRadian(models.data[m].rotationZ));
+        models.objects[m].rotation.set(convert.toRadian(models.data[m].rotationX),convert.toRadian(models.data[m].rotationY),convert.toRadian(models.data[m].rotationZ));
         // models.objects[m].worldAnimation = new worldAnimation(models.objects[m]);
         // models.objects[m].sound = new sound(models.objects[m]);
         scene.add(models.objects[m]);
       }
 
+    },
+
+    verschilX: [],
+    verschilY: [],
+    verschilZ: [],
+    moveWithCamera: function() {
+      for (i=0; i < models.objects.length; i++){
+        if(models.objects[i].position.distanceTo(camera.position) > activeArea) {
+          models.verschilX[i] = models.objects[i].position.x - camera.position.x;
+          models.verschilY[i] = models.objects[i].position.y - camera.position.y;
+          models.verschilZ[i] = models.objects[i].position.z - camera.position.z;
+
+          if (models.verschilX[i] < -activeArea) { models.objects[i].position.x = models.objects[i].position.x + (2*activeArea-200); }
+          if (models.verschilX[i] > activeArea) { models.objects[i].position.x = models.objects[i].position.x - (2*activeArea-200); }
+          if (models.verschilY[i] < -activeArea) { models.objects[i].position.y = models.objects[i].position.y + (2*activeArea-200); }
+          if (models.verschilY[i] > activeArea) { models.objects[i].position.y = models.objects[i].position.y - (2*activeArea-200); }
+          if (models.verschilZ[i] < -activeArea) { models.objects[i].position.z = models.objects[i].position.z + (2*activeArea-200); }
+          if (models.verschilZ[i] > activeArea) { models.objects[i].position.z = models.objects[i].position.z - (2*activeArea-200); }
+        }
+      }
     }
 
   };

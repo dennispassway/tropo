@@ -35,6 +35,21 @@ define(function() {
         particleSystem.rotation.y += 0.002;
         particleSystem.rotation.z += 0.001;
       }
+    },
+
+    moveWithCamera: function() {
+      if(particleSystem && particleSystem.position.distanceTo(camera.position) > activeArea) {
+        particleVerschilX = particleSystem.position.x - camera.position.x;
+        particleVerschilY = particleSystem.position.y - camera.position.y;
+        particleVerschilZ = particleSystem.position.z - camera.position.z;
+
+        if (particleVerschilX < -activeArea) { particleSystem.position.x = particleSystem.position.x + (2*activeArea-200); }
+        if (particleVerschilX > activeArea) { particleSystem.position.x = particleSystem.position.x - (2*activeArea-200); }
+        if (particleVerschilY < -activeArea) { particleSystem.position.y = particleSystem.position.y + (2*activeArea-200); }
+        if (particleVerschilY > activeArea) { particleSystem.position.y = particleSystem.position.y - (2*activeArea-200); }
+        if (particleVerschilZ < -activeArea) { particleSystem.position.z = particleSystem.position.z + (2*activeArea-200); }
+        if (particleVerschilZ > activeArea) { particleSystem.position.z = particleSystem.position.z - (2*activeArea-200); }
+      }
     }
   };
   return particles;

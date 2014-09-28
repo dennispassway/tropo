@@ -15,4 +15,11 @@ define(function() {
   animationDistance = 1500;
   animationRotationSpeed = 0.02;
 
+  // Get world variable from url
+  urlVars = {};
+  urlParts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      urlVars[key] = value;
+  });
+  worldNumber = urlVars.world;
+
 });

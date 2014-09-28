@@ -23,8 +23,10 @@ define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skyb
       // Skybox
       skybox.init();
 
-      // Particles
-      particles.init(); // if (!worldNumber || worldNumber == 1)
+      // Particles if we're in the snowworld
+      if (!worldNumber || worldNumber == 1) {
+        particles.init();
+      }
 
       // Get, load and place models
       models.init();
@@ -44,12 +46,18 @@ define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skyb
       window.requestAnimationFrame( app.animate );
 
       // Make particles move
-      particles.update();
+      if (!worldNumber || worldNumber == 1) {
+        particles.update();
+      }
 
-      // Make skybox move with camera
-      skybox.object.position.set(camera.position.x,camera.position.y,camera.position.z);
+      // Make world move with camera
+      skybox.moveWithCamera();
+      models.moveWithCamera();
 
-      // checkPositionDistance();
+      if (!worldNumber || worldNumber == 1) {
+        particles.moveWithCamera();
+      }
+
       // checkAnimationDistance();
 
       // Object animation update
