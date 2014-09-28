@@ -1,6 +1,9 @@
 define(function() {
 
   var skybox = {
+
+    object: {},
+
     init: function () {
       skyboxLoader = new THREE.JSONLoader();
 
@@ -9,10 +12,10 @@ define(function() {
       // if (worldNumber == 2) skyboxModel = 'model/nijntje/boundingBox/boundingBox.js';
 
       skyboxLoader.load(skyboxModel, function (geometry,materials) {
-          skybox = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
-          skybox.scale.set(7,7,7);
-          skybox.name = 'skybox';
-          scene.add(skybox);
+          skybox.object = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
+          skybox.object.scale.set(7,7,7);
+          skybox.object.name = 'skybox';
+          scene.add(skybox.object);
       });
     }
   };

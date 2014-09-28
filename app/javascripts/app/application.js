@@ -47,7 +47,7 @@ define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skyb
       particles.update();
 
       // Make skybox move with camera
-      // scene.childen.position.set(camera.position.x,camera.position.y,camera.position.z);
+      skybox.object.position.set(camera.position.x,camera.position.y,camera.position.z);
 
       // checkPositionDistance();
       // checkAnimationDistance();
