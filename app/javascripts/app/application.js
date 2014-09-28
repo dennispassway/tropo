@@ -1,5 +1,5 @@
-define(['jquery', 'threejs', 'oculus', 'fpc', 'variables', 'skybox', 'particles', 'windowResize', 'placeModels'],
- function($, three, oculus, fpc, variables, skybox, particles, onWindowResize, placeModels) {
+define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skybox', 'particles', 'models'],
+ function($, three, oculus, fpc, onWindowResize, variables, skybox, particles, models) {
 
   var app = {
     init: function () {
@@ -26,8 +26,8 @@ define(['jquery', 'threejs', 'oculus', 'fpc', 'variables', 'skybox', 'particles'
       // Particles
       particles.init(); // if (!worldNumber || worldNumber == 1)
 
-      // Place models
-      placeModels();
+      // Get, load and place models
+      models.init();
 
       // Create Clock
       clock = new THREE.Clock();
