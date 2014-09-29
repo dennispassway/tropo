@@ -1,6 +1,8 @@
 define(['application'], function(app) {
 
-  app.init(true); // Pass true to use oculus effect
+  app.useOculus = true;
+
+  app.init();
   app.animate();
 
 });

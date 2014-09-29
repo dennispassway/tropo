@@ -12,11 +12,8 @@ define(['convert', 'sounds'], function(convert, sounds) {
 
     get: function () {
 
-      // var databaseNumber = worldNumber;
-      var databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/1/public/values?alt=json';
-
-      databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/1/public/values?alt=json'; // if (databaseNumber == 1)
-      // if (databaseNumber == 2) databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/2/public/values?alt=json';
+      if (!worldNumber || worldNumber == 1) databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/1/public/values?alt=json';
+      // if (worldNumber == 2) databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/2/public/values?alt=json';
 
       $.getJSON(databaseSheet, function(data){
 
@@ -46,49 +43,49 @@ define(['convert', 'sounds'], function(convert, sounds) {
 
     load: function() {
 
-      new THREE.JSONLoader().load('objects/model/wolk-1.js', function (geometry,materials) {
+      new THREE.JSONLoader().load('objects/model/tropo/wolk-1.js', function (geometry,materials) {
           models.wolk1 = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
       });
 
-      new THREE.JSONLoader().load('objects/model/wolk-2.js', function (geometry,materials) {
+      new THREE.JSONLoader().load('objects/model/tropo/wolk-2.js', function (geometry,materials) {
           models.wolk2 = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
       });
 
-      new THREE.JSONLoader().load('objects/model/wolk-3.js', function (geometry,materials) {
+      new THREE.JSONLoader().load('objects/model/tropo/wolk-3.js', function (geometry,materials) {
           models.wolk3 = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
       });
 
-      new THREE.JSONLoader().load('objects/model/pinguin-1-jetpack.js', function (geometry,materials) {
+      new THREE.JSONLoader().load('objects/model/tropo/pinguin-1-jetpack.js', function (geometry,materials) {
           models.pinguin1 = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.pinguin1.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
       });
 
-      new THREE.JSONLoader().load('objects/model/pinguin-2-scooter.js', function (geometry,materials) {
+      new THREE.JSONLoader().load('objects/model/tropo/pinguin-2-scooter.js', function (geometry,materials) {
           models.pinguin2 = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.pinguin2.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
       });
 
-      new THREE.JSONLoader().load('objects/model/pinguin-3-rocket.js', function (geometry,materials) {
+      new THREE.JSONLoader().load('objects/model/tropo/pinguin-3-rocket.js', function (geometry,materials) {
           models.pinguin3 = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.pinguin3.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
       });
 
-      new THREE.JSONLoader().load('objects/model/ijsbeer.js', function (geometry,materials) {
+      new THREE.JSONLoader().load('objects/model/tropo/ijsbeer.js', function (geometry,materials) {
           models.ijsbeer = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.ijsbeer.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
       });
 
-      new THREE.JSONLoader().load('objects/model/narwal.js', function (geometry,materials) {
+      new THREE.JSONLoader().load('objects/model/tropo/narwal.js', function (geometry,materials) {
           models.narwal = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.narwal.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
       });
 
-      new THREE.JSONLoader().load('objects/model/meeuw.js', function (geometry,materials) {
+      new THREE.JSONLoader().load('objects/model/tropo/meeuw.js', function (geometry,materials) {
           models.meeuw = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));
           materials = models.meeuw.material.materials;
           for (i = 0,length = materials.length; i < length; i++) { mat = materials[i]; mat.skinning = true; }
@@ -96,7 +93,7 @@ define(['convert', 'sounds'], function(convert, sounds) {
 
       setTimeout(function() {
         models.place(); // TODO: has to be a better way
-      }, 1500);
+      }, 1000);
 
     },
 
@@ -167,11 +164,6 @@ define(['convert', 'sounds'], function(convert, sounds) {
     checkAnimationDistance: function() {
       for (i = 0; i < models.objects.length; i++) {
         if (models.objects[i].position.distanceTo(camera.position) < animationDistance) {
-
-          // if (models.objects[i].animation && !models.objects[i].animation.isPlaying){
-              // models.objects[i].animation.play();
-              // if (game) game.collectElement(models.objects[i]);
-          // }
 
           if (typeof models.objects[i].sound.play == 'function') {
             models.objects[i].sound.play();

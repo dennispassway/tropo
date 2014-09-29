@@ -2,7 +2,10 @@ define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skyb
  function($, three, oculus, fpc, onWindowResize, variables, skybox, particles, models, sounds) {
 
   var app = {
-    init: function (oculus) {
+
+    useOculus: false,
+
+    init: function () {
       container = document.getElementById( 'container' );
 
       // Scene
@@ -14,6 +17,7 @@ define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skyb
 
       // Controls
       controls = new THREE.FirstPersonControls( camera );
+      controls.moveForward = true;
 
       // Renderer
       renderer = new THREE.WebGLRenderer( {antialias : true});
@@ -74,8 +78,8 @@ define(['jquery', 'threejs', 'oculus', 'fpc', 'windowResize', 'variables', 'skyb
     render: function () {
       controls.update( clock.getDelta() );
 
-      effect.render( scene, camera );
-      //   renderer.render( scene, camera );
+      if (app.useOculus) effect.render( scene, camera );
+      else renderer.render( scene, camera );
     }
 
   };

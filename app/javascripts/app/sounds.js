@@ -3,20 +3,17 @@ define(function() {
   var sounds = {
 
     load: function() {
-      backgroundMusic = new Audio('objects/sounds/backgroundMusic.mp3');
-      if (worldNumber == 1) backgroundMusic = new Audio('objects/sounds/backgroundMusic.mp3');
+      backgroundMusic = new Audio('objects/sounds/tropo/backgroundMusic.mp3');
+      if (worldNumber == 1) backgroundMusic = new Audio('objects/sounds/tropo/backgroundMusic.mp3');
       if (worldNumber == 2) backgroundMusic = new Audio('objects/sounds/nijntje/backgroundmusic.mp3');
       backgroundMusic.loop = true;
 
-      collectSound = new Audio('objects/sounds/collectSound.mp3');
-      completedMusic = new Audio('objects/sounds/completedMusic.mp3');
-
-      jetpackPinguinSound = new Audio('objects/sounds/pinguin-jetpack.mp3');
-      scooterPinguinSound = new Audio('objects/sounds/pinguin-scooter.mp3');
-      rocketPinguinSound = new Audio('objects/sounds/pinguin-rocket.mp3');
-      ijsbeerSound = new Audio('objects/sounds/ijsbeer.mp3');
-      narwalSound = new Audio('objects/sounds/narwal.mp3');
-      meeuwSound = new Audio('objects/sounds/meeuw.mp3');
+      jetpackPinguinSound = new Audio('objects/sounds/tropo/pinguin-jetpack.mp3');
+      scooterPinguinSound = new Audio('objects/sounds/tropo/pinguin-scooter.mp3');
+      rocketPinguinSound = new Audio('objects/sounds/tropo/pinguin-rocket.mp3');
+      ijsbeerSound = new Audio('objects/sounds/tropo/ijsbeer.mp3');
+      narwalSound = new Audio('objects/sounds/tropo/narwal.mp3');
+      meeuwSound = new Audio('objects/sounds/tropo/meeuw.mp3');
 
       nijntjeBalSound = new Audio('objects/sounds/nijntje/bal.mp3');
       nijntjeBeerSound = new Audio('objects/sounds/nijntje/beer.mp3');

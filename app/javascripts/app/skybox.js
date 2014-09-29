@@ -7,8 +7,7 @@ define(function() {
     init: function () {
       skyboxLoader = new THREE.JSONLoader();
 
-      skyboxModel = 'objects/model/boundingBox/boundingBox.js';
-      if (worldNumber == 1) skyboxModel = 'objects/model/boundingBox/boundingBox.js';
+      if (!worldNumber || worldNumber == 1) skyboxModel = 'objects/model/tropo/boundingBox/boundingBox.js';
       if (worldNumber == 2) skyboxModel = 'objects/model/nijntje/boundingBox/boundingBox.js';
 
       skyboxLoader.load(skyboxModel, function (geometry,materials) {
@@ -20,7 +19,7 @@ define(function() {
     },
 
     moveWithCamera: function() {
-      skybox.object.position.set(camera.position.x,camera.position.y,camera.position.z);
+      if (skybox.object.position) skybox.object.position.set(camera.position.x,camera.position.y,camera.position.z);
     }
   };
   return skybox;
