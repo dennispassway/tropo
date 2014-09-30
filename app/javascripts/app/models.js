@@ -12,8 +12,8 @@ define(['convert', 'sounds'], function(convert, sounds) {
 
     get: function () {
 
-      if (!worldNumber || worldNumber == 1) databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/1/public/values?alt=json';
-      // if (worldNumber == 2) databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/2/public/values?alt=json';
+      if (world == 1) databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/1/public/values?alt=json';
+      if (world == 2) databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/2/public/values?alt=json';
 
       $.getJSON(databaseSheet, function(data){
 

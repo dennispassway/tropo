@@ -1,6 +1,6 @@
 # Tropo
 
-Tropo was a graduation project that explored the possibilities of gestures and user experience design. It is an in-browser 3D world build with ThreeJS. Originally it was build on the CommonJS way. This new version is build modular with RequireJS so that it the application can easily be changed or improved.
+Tropo was a graduation project that explored the possibilities of gestures and user experience design. It is an in-browser 3D world build with ThreeJS. Originally it was build as a CommonJS application. This new version of Tropo is build modular with RequireJS so that the application can easily be changed or improved.
 
 Check out the awesome casevideo of the original Tropo application!
 
@@ -8,7 +8,9 @@ http://www.youtube.com/watch?v=ZSKOVhtH2zc
 
 ## Oculus Rift
 
-The current version of Tropo is optimized for the Oculus Rift DK2. The 3D world can be run with, or without the Oculus effect in case you do not own an Oculus Rift.
+The current version of Tropo is optimized for the Oculus Rift DK2. The 3D world can be run with, or without the Oculus effect in case you do not own an Oculus Rift. When using the Oculus Rift, make sure you start the oculus-rest server before opening the application. The oculus-rest server file can be found in the root of the repository.
+
+The original pre-build files as used for this server can be found at https://github.com/msfeldstein/oculus-rest.
 
 ## Requirements
 
@@ -28,4 +30,4 @@ After cloning the repository use `npm install` to install the developer dependen
 Don't forget to start the oculus-rest server when you use the Oculus Rift!
 
 ## Switching between the Oculus and the normal application
-In app/javascripts/main.js there is a variable `app.useOculus = false`. Setting this to false disables the oculus mode and vice versa!
+In app/javascripts/main.js there is a variable `app.useOculus = false. Setting this to false disables the oculus mode and vice versa!

@@ -7,8 +7,8 @@ define(function() {
     init: function () {
       skyboxLoader = new THREE.JSONLoader();
 
-      if (!worldNumber || worldNumber == 1) skyboxModel = 'objects/model/tropo/boundingBox/boundingBox.js';
-      if (worldNumber == 2) skyboxModel = 'objects/model/nijntje/boundingBox/boundingBox.js';
+      if (world == 1) skyboxModel = 'objects/model/tropo/boundingBox/boundingBox.js';
+      if (world == 2) skyboxModel = 'objects/model/nijntje/boundingBox/boundingBox.js';
 
       skyboxLoader.load(skyboxModel, function (geometry,materials) {
           skybox.object = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials));

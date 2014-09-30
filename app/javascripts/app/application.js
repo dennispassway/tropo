@@ -1,5 +1,5 @@
-define(['jquery', 'threejs', 'oculusEffect', 'oculusControls', 'fpc', 'windowResize', 'variables', 'skybox', 'particles', 'models', 'sounds'],
- function($, three, oculuseffect, oculuscontrols, fpc, onWindowResize, variables, skybox, particles, models, sounds) {
+define(['jquery', 'threejs', 'oculusEffect', 'oculusControls', 'fpc', 'windowResize', 'variables', 'skybox', 'particles', 'models', 'sounds', 'fullscreen'],
+ function($, three, oculuseffect, oculuscontrols, fpc, onWindowResize, variables, skybox, particles, models, sounds, launchFullscreen) {
 
   var app = {
 
@@ -28,7 +28,7 @@ define(['jquery', 'threejs', 'oculusEffect', 'oculusControls', 'fpc', 'windowRes
       skybox.init();
 
       // Particles if we're in the snowworld
-      if (!worldNumber || worldNumber == 1) particles.init();
+      if (world == 1) particles.init();
 
       // Get, load and place models
       models.init();
@@ -53,13 +53,18 @@ define(['jquery', 'threejs', 'oculusEffect', 'oculusControls', 'fpc', 'windowRes
         oculusControls = new THREE.OculusControls( camera );
         oculusControls.connect();
       }
+
+      // Go fullscreen on click in body
+      $('body').on('click', function() {
+        launchFullscreen(document.documentElement);
+      });
     },
 
     animate: function () {
       window.requestAnimationFrame( app.animate );
 
       // Make particles move and follow camera
-      if (!worldNumber || worldNumber == 1) {
+      if (world == 1) {
         particles.update();
         particles.moveWithCamera();
       }

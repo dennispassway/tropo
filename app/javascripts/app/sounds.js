@@ -3,9 +3,8 @@ define(function() {
   var sounds = {
 
     load: function() {
-      backgroundMusic = new Audio('objects/sounds/tropo/backgroundMusic.mp3');
-      if (worldNumber == 1) backgroundMusic = new Audio('objects/sounds/tropo/backgroundMusic.mp3');
-      if (worldNumber == 2) backgroundMusic = new Audio('objects/sounds/nijntje/backgroundmusic.mp3');
+      if (world == 1) backgroundMusic = new Audio('objects/sounds/tropo/backgroundMusic.mp3');
+      if (world == 2) backgroundMusic = new Audio('objects/sounds/nijntje/backgroundmusic.mp3');
       backgroundMusic.loop = true;
 
       jetpackPinguinSound = new Audio('objects/sounds/tropo/pinguin-jetpack.mp3');
