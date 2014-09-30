@@ -19,9 +19,6 @@ define(['jquery', 'threejs', 'oculusEffect', 'oculusControls', 'fpc', 'windowRes
       controls = new THREE.FirstPersonControls( camera );
       controls.moveForward = true;
 
-      // Set oculusControls
-      if (app.useOculus) oculusControls = new THREE.OculusControls( camera );
-
       // Renderer
       renderer = new THREE.WebGLRenderer( {antialias : true});
       renderer.setClearColor( 0xA2BED8 );
@@ -49,26 +46,29 @@ define(['jquery', 'threejs', 'oculusEffect', 'oculusControls', 'fpc', 'windowRes
       // Make screen resizable
       window.addEventListener( 'resize', onWindowResize, false );
 
-      // Configure oculus effect
-      if (app.useOculus) effect = new THREE.OculusRiftEffect( renderer, {worldScale: 100} );
-      if (app.useOculus) effect.setSize( window.innerWidth, window.innerHeight );
-
-      // Start oculus controls
-      if (app.useOculus) oculusControls.connect();
+      // Oculus setup
+      if (app.useOculus) {
+        effect = new THREE.OculusRiftEffect( renderer, {worldScale: 100} );
+        effect.setSize( window.innerWidth, window.innerHeight );
+        oculusControls = new THREE.OculusControls( camera );
+        oculusControls.connect();
+      }
     },
 
     animate: function () {
       window.requestAnimationFrame( app.animate );
 
-      // Make particles move
-      if (!worldNumber || worldNumber == 1) particles.update();
+      // Make particles move and follow camera
+      if (!worldNumber || worldNumber == 1) {
+        particles.update();
+        particles.moveWithCamera();
+      }
 
       // Make world move with camera
       skybox.moveWithCamera();
       models.moveWithCamera();
-      if (!worldNumber || worldNumber == 1) particles.moveWithCamera();
 
-      // Check distance too objects for animation
+      // Check distance to objects for animation
       models.checkAnimationDistance();
 
       // Render the new image
@@ -78,10 +78,12 @@ define(['jquery', 'threejs', 'oculusEffect', 'oculusControls', 'fpc', 'windowRes
     render: function () {
       controls.update( clock.getDelta() );
 
-      if (app.useOculus) oculusControls.update( clock.getDelta() );
-
-      if (app.useOculus) effect.render( scene, camera );
-      else renderer.render( scene, camera );
+      if (app.useOculus) {
+        oculusControls.update( clock.getDelta() );
+        effect.render( scene, camera );
+      } else {
+        renderer.render( scene, camera );
+      }
     }
 
   };
