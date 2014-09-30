@@ -5,7 +5,8 @@ requirejs.config({
   paths: {
     jquery: '../../vendor/jquery/dist/jquery.min',
     threejs: '../../vendor/threejs/build/three.min',
-    oculus: '../lib/OculusRift2Effect',
+    oculusEffect: '../lib/OculusRift2Effect',
+    oculusControls: '../lib/OculusControls',
     fpc: '../lib/FirstPersonControls',
     main: '../main'
   },

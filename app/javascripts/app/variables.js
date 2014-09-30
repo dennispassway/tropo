@@ -8,7 +8,7 @@ define(function() {
   far = activeArea+4500;
 
   // Controls
-  movementSpeed = 3000;
+  movementSpeed = 1000;
   lookSpeed = 0.05;
 
   // Animation

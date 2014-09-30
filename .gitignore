@@ -1,3 +1,4 @@
 node_modules/
 app/vendor/
+oculus-rest-master/
 .DS_Store
